@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CopyMyTrade.app — Live Futures Copy Trading by DayTradingRadio</title>
+<title>CopyMyTrades.app — Live Futures Copy Trading by DayTradingRadio</title>
 <meta name="description" content="Copy live futures trades in real time. Powered by Replikanto & NinjaTrader 8. From the desk of DayTradingRadio.com — 25+ years of experience.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -14,7 +13,9 @@
   --red-dark: #B71C2A;
   --red-glow: rgba(215,38,56,0.08);
   --red-light: #FEF0F1;
+  --blue: #4FC3F7;
   --black: #1A1A1A;
+  --hero-bg: #0D1117;
   --white: #FFFFFF;
   --white-off: #F8F6F3;
   --cream: #F0EDE8;
@@ -46,7 +47,6 @@ body {
 .section { padding: 100px 0; }
 .section--cream { background: var(--white-off); }
 .section--white { background: var(--white); }
-.section--redlight { background: var(--red-light); }
 
 .tag {
   display: inline-block;
@@ -62,13 +62,13 @@ body {
 .tag--red { color: var(--red); border-color: var(--red); background: var(--red-glow); }
 .tag--dark { color: var(--gray-600); border-color: var(--gray-200); }
 
-/* ═══ HERO ═══ */
+/* ═══ HERO (DARK) ═══ */
 .hero {
   position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: var(--white);
+  background: var(--hero-bg);
   overflow: hidden;
 }
 .hero::before {
@@ -76,15 +76,15 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(215,38,56,0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(215,38,56,0.03) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(79,195,247,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(215,38,56,0.06) 0%, transparent 60%);
 }
 .hero__grid-bg {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 .hero__content {
@@ -96,19 +96,19 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--red-glow);
-  border: 1px solid rgba(215,38,56,0.2);
+  background: rgba(79,195,247,0.1);
+  border: 1px solid rgba(79,195,247,0.25);
   border-radius: 100px;
   padding: 8px 20px 8px 12px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--red);
+  color: var(--blue);
   margin-bottom: 32px;
   animation: fadeUp 0.8s ease both;
 }
 .hero__badge .dot {
   width: 8px; height: 8px;
-  background: var(--red);
+  background: #00E676;
   border-radius: 50%;
   animation: pulse 2s ease-in-out infinite;
 }
@@ -117,14 +117,16 @@ body {
   font-size: clamp(56px, 10vw, 120px);
   line-height: 0.92;
   letter-spacing: -1px;
-  color: var(--black);
+  color: var(--white);
   margin-bottom: 28px;
   animation: fadeUp 0.8s ease 0.15s both;
 }
-.hero__title span { color: var(--red); }
+.hero__title .blue { color: var(--blue); }
+.hero__title .green { color: #00E676; }
+.hero__title .red { color: var(--red); }
 .hero__sub {
   font-size: 20px;
-  color: var(--gray-600);
+  color: #8B949E;
   max-width: 520px;
   line-height: 1.6;
   margin-bottom: 48px;
@@ -141,20 +143,86 @@ body {
   gap: 48px;
   margin-top: 72px;
   padding-top: 40px;
-  border-top: 1px solid var(--gray-100);
+  border-top: 1px solid rgba(255,255,255,0.08);
   animation: fadeUp 0.8s ease 0.6s both;
 }
 .hero__stat-num {
   font-family: var(--font-display);
   font-size: 42px;
-  color: var(--black);
+  color: var(--white);
   line-height: 1;
 }
 .hero__stat-label {
   font-size: 13px;
-  color: var(--gray-400);
+  color: #8B949E;
   margin-top: 4px;
   letter-spacing: 0.5px;
+}
+.btn--outline-light {
+  background: transparent;
+  color: var(--white);
+  border: 1.5px solid rgba(255,255,255,0.2);
+}
+.btn--outline-light:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); }
+
+/* ═══ NAV ═══ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 0;
+  transition: all 0.3s ease;
+}
+.nav.scrolled {
+  background: rgba(13,17,23,0.92);
+  backdrop-filter: blur(20px);
+  padding: 14px 0;
+  box-shadow: 0 2px 40px rgba(0,0,0,0.3);
+}
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.nav__logo {
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--white);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav__logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--red);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: white;
+}
+.nav__links { display: flex; align-items: center; gap: 32px; }
+.nav__links a {
+  color: #8B949E;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav__links a:hover { color: var(--white); }
+.nav__cta {
+  font-size: 13px !important;
+  padding: 10px 24px !important;
+  border-radius: 10px !important;
 }
 
 /* ═══ BUTTONS ═══ */
@@ -202,66 +270,6 @@ body {
 .btn--white:hover { background: var(--gray-100); transform: translateY(-2px); }
 .btn svg { width: 18px; height: 18px; }
 
-/* ═══ NAV ═══ */
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  padding: 20px 0;
-  transition: all 0.3s ease;
-}
-.nav.scrolled {
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(20px);
-  padding: 14px 0;
-  box-shadow: 0 2px 40px rgba(0,0,0,0.08);
-}
-.nav__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-.nav__logo {
-  font-family: var(--font-display);
-  font-size: 26px;
-  color: var(--black);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.nav__logo-icon {
-  width: 36px;
-  height: 36px;
-  background: var(--red);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 800;
-  color: white;
-}
-.nav__links { display: flex; align-items: center; gap: 32px; }
-.nav__links a {
-  color: var(--gray-600);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-.nav__links a:hover { color: var(--black); }
-.nav__cta {
-  font-size: 13px !important;
-  padding: 10px 24px !important;
-  border-radius: 10px !important;
-}
-
 /* ═══ HOW IT WORKS ═══ */
 .steps-grid {
   display: grid;
@@ -299,496 +307,101 @@ body {
   font-size: 22px;
   margin-bottom: 20px;
 }
-.step-title {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  color: var(--black);
-}
-.step-desc {
-  font-size: 14px;
-  color: var(--gray-600);
-  line-height: 1.6;
-}
+.step-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--black); }
+.step-desc { font-size: 14px; color: var(--gray-600); line-height: 1.6; }
 
-/* ═══ STRATEGY SECTION ═══ */
-.strategy-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 56px;
-}
-.strat-card {
-  background: var(--white);
-  border: 1px solid var(--gray-100);
-  border-radius: 20px;
-  padding: 36px;
-  transition: all 0.3s ease;
-}
+/* ═══ STRATEGY ═══ */
+.strategy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+.strat-card { background: var(--white); border: 1px solid var(--gray-100); border-radius: 20px; padding: 36px; transition: all 0.3s ease; }
 .strat-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
-.strat-card__icon {
-  font-size: 28px;
-  margin-bottom: 16px;
-}
-.strat-card__title {
-  font-family: var(--font-display);
-  font-size: 26px;
-  color: var(--black);
-  margin-bottom: 12px;
-  letter-spacing: 0.5px;
-}
-.strat-card__text {
-  font-size: 15px;
-  color: var(--gray-600);
-  line-height: 1.7;
-}
-.strat-card__detail {
-  margin-top: 20px;
-  padding: 16px 20px;
-  background: var(--red-light);
-  border-radius: 12px;
-  border-left: 3px solid var(--red);
-}
-.strat-card__detail p {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--gray-800);
-  line-height: 1.8;
-}
-.strat-card--wide {
-  grid-column: 1 / -1;
-}
+.strat-card__icon { font-size: 28px; margin-bottom: 16px; }
+.strat-card__title { font-family: var(--font-display); font-size: 26px; color: var(--black); margin-bottom: 12px; letter-spacing: 0.5px; }
+.strat-card__text { font-size: 15px; color: var(--gray-600); line-height: 1.7; }
+.strat-card__detail { margin-top: 20px; padding: 16px 20px; background: var(--red-light); border-radius: 12px; border-left: 3px solid var(--red); }
+.strat-card__detail p { font-family: var(--font-mono); font-size: 13px; color: var(--gray-800); line-height: 1.8; }
+.strat-card--wide { grid-column: 1 / -1; }
 
 /* ═══ TRADE SETUPS ═══ */
-.setups-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 48px;
-}
-.setup-item {
-  background: var(--white);
-  border: 1px solid var(--gray-100);
-  border-radius: 16px;
-  padding: 28px 24px;
-  text-align: center;
-  transition: all 0.3s ease;
-}
+.setups-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+.setup-item { background: var(--white); border: 1px solid var(--gray-100); border-radius: 16px; padding: 28px 24px; text-align: center; transition: all 0.3s ease; }
 .setup-item:hover { border-color: var(--red); box-shadow: 0 8px 32px rgba(215,38,56,0.08); transform: translateY(-2px); }
 .setup-item__icon { font-size: 32px; margin-bottom: 12px; }
-.setup-item__name {
-  font-family: var(--font-display);
-  font-size: 22px;
-  letter-spacing: 0.5px;
-  color: var(--black);
-  margin-bottom: 8px;
-}
-.setup-item__desc {
-  font-size: 13px;
-  color: var(--gray-600);
-  line-height: 1.6;
-}
+.setup-item__name { font-family: var(--font-display); font-size: 22px; letter-spacing: 0.5px; color: var(--black); margin-bottom: 8px; }
+.setup-item__desc { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
 
 /* ═══ PRICING ═══ */
-.pricing-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 24px;
-  margin-top: 56px;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.price-card {
-  background: var(--white);
-  border: 2px solid var(--gray-100);
-  border-radius: 24px;
-  padding: 44px 36px;
-  text-align: center;
-  position: relative;
-  transition: all 0.3s ease;
-}
-.price-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
-.price-card--featured {
-  border-color: var(--red);
-  box-shadow: 0 8px 40px rgba(215,38,56,0.1);
-}
-.price-card--featured::before {
-  content: 'MOST POPULAR';
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--red);
-  color: var(--white);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  padding: 5px 18px;
-  border-radius: 100px;
-}
-.price-card__type {
-  font-family: var(--font-display);
-  font-size: 24px;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-  color: var(--black);
-}
-.price-card__desc {
-  font-size: 14px;
-  color: var(--gray-600);
-  margin-bottom: 24px;
-}
-.price-card__amount {
-  font-family: var(--font-display);
-  font-size: 64px;
-  color: var(--black);
-  line-height: 1;
-}
-.price-card__amount sup {
-  font-size: 28px;
-  vertical-align: super;
-  margin-right: 2px;
-}
-.price-card__period {
-  font-size: 14px;
-  color: var(--gray-400);
-  margin-bottom: 28px;
-}
-.price-card__features {
-  list-style: none;
-  text-align: left;
-  margin-bottom: 32px;
-}
-.price-card__features li {
-  padding: 10px 0;
-  font-size: 14px;
-  color: var(--gray-600);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-bottom: 1px solid var(--gray-100);
-}
-.price-card__features li:last-child { border: none; }
-.price-card__features .check {
-  color: var(--green);
-  font-weight: 700;
-  font-size: 16px;
-}
+.pricing-grid { display: grid; grid-template-columns: 1fr; max-width: 640px; gap: 24px; margin-top: 56px; margin-left: auto; margin-right: auto; }
+.price-card { background: var(--white); border: 2px solid var(--gray-100); border-radius: 24px; padding: 44px 36px; text-align: center; position: relative; transition: all 0.3s ease; }
 
 /* ═══ WARNING ═══ */
-.warning {
-  background: #FFF8E1;
-  border: 2px solid #FFD54F;
-  border-radius: 20px;
-  padding: 36px 40px;
-  margin-top: 56px;
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
+.warning { background: #FFF8E1; border: 2px solid #FFD54F; border-radius: 20px; padding: 36px 40px; margin-top: 56px; display: flex; gap: 20px; align-items: flex-start; }
 .warning__icon { font-size: 32px; flex-shrink: 0; }
-.warning__title {
-  font-weight: 700;
-  font-size: 16px;
-  color: #E65100;
-  margin-bottom: 8px;
-}
-.warning__text {
-  font-size: 14px;
-  color: #795548;
-  line-height: 1.7;
-}
+.warning__title { font-weight: 700; font-size: 16px; color: #E65100; margin-bottom: 8px; }
+.warning__text { font-size: 14px; color: #795548; line-height: 1.7; }
 
-/* ═══ PODCAST BANNER ═══ */
-.podcast-banner {
-  background: var(--red);
-  border-radius: 24px;
-  padding: 56px;
-  display: flex;
-  align-items: center;
-  gap: 48px;
-  margin-top: 56px;
-  color: var(--white);
-}
-.podcast-banner__icon {
-  width: 100px;
-  height: 100px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 48px;
-  flex-shrink: 0;
-}
-.podcast-banner__title {
-  font-family: var(--font-display);
-  font-size: 36px;
-  margin-bottom: 12px;
-}
-.podcast-banner__text {
-  font-size: 15px;
-  color: rgba(255,255,255,0.85);
-  line-height: 1.7;
-  max-width: 540px;
-}
+/* ═══ PODCAST ═══ */
+.podcast-banner { background: var(--red); border-radius: 24px; padding: 56px; display: flex; align-items: center; gap: 48px; margin-top: 56px; color: var(--white); }
+.podcast-banner__icon { width: 100px; height: 100px; background: rgba(255,255,255,0.15); border-radius: 24px; display: flex; align-items: center; justify-content: center; font-size: 48px; flex-shrink: 0; }
+.podcast-banner__title { font-family: var(--font-display); font-size: 36px; margin-bottom: 12px; }
+.podcast-banner__text { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.7; max-width: 540px; }
 
 /* ═══ SECTION HEADERS ═══ */
 .section-header { margin-bottom: 16px; }
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(36px, 5vw, 56px);
-  line-height: 1;
-  letter-spacing: 0.5px;
-  color: var(--black);
-}
-.section-sub {
-  font-size: 17px;
-  color: var(--gray-600);
-  max-width: 560px;
-  margin-top: 16px;
-  line-height: 1.7;
-}
+.section-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 56px); line-height: 1; letter-spacing: 0.5px; color: var(--black); }
+.section-sub { font-size: 17px; color: var(--gray-600); max-width: 560px; margin-top: 16px; line-height: 1.7; }
 
 /* ═══ ABOUT ═══ */
-.about-block {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
-  margin-top: 56px;
-}
-.about-quote {
-  font-size: 22px;
-  font-style: italic;
-  line-height: 1.7;
-  color: var(--gray-800);
-  border-left: 4px solid var(--red);
-  padding-left: 28px;
-  margin-bottom: 28px;
-}
-.about-text {
-  font-size: 15px;
-  color: var(--gray-600);
-  line-height: 1.8;
-}
-.about-cred {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 32px;
-}
-.about-cred__item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--black);
-}
-.about-cred__icon {
-  width: 40px;
-  height: 40px;
-  background: var(--red-glow);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-}
-.about-right {
-  background: var(--red-light);
-  border: 1px solid rgba(215,38,56,0.15);
-  border-radius: 24px;
-  padding: 48px;
-}
-.about-right__title {
-  font-family: var(--font-display);
-  font-size: 28px;
-  color: var(--black);
-  margin-bottom: 20px;
-}
-.about-right__list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.about-right__list li {
-  font-size: 14px;
-  color: var(--gray-800);
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  line-height: 1.6;
-}
-.about-right__list .bullet {
-  color: var(--red);
-  font-weight: 700;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
+.about-block { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 56px; }
+.about-quote { font-size: 22px; font-style: italic; line-height: 1.7; color: var(--gray-800); border-left: 4px solid var(--red); padding-left: 28px; margin-bottom: 28px; }
+.about-text { font-size: 15px; color: var(--gray-600); line-height: 1.8; }
+.about-cred { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+.about-cred__item { display: flex; align-items: center; gap: 14px; font-size: 15px; font-weight: 600; color: var(--black); }
+.about-cred__icon { width: 40px; height: 40px; background: var(--red-glow); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.about-right { background: var(--red-light); border: 1px solid rgba(215,38,56,0.15); border-radius: 24px; padding: 48px; }
+.about-right__title { font-family: var(--font-display); font-size: 28px; color: var(--black); margin-bottom: 20px; }
+.about-right__list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.about-right__list li { font-size: 14px; color: var(--gray-800); display: flex; gap: 12px; align-items: flex-start; line-height: 1.6; }
+.about-right__list .bullet { color: var(--red); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
 
 /* ═══ SOFTWARE ═══ */
-.software-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 56px;
-}
-.sw-card {
-  background: var(--white);
-  border: 1px solid var(--gray-100);
-  border-radius: 20px;
-  padding: 36px;
-  transition: all 0.3s ease;
-}
+.software-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+.sw-card { background: var(--white); border: 1px solid var(--gray-100); border-radius: 20px; padding: 36px; transition: all 0.3s ease; }
 .sw-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
-.sw-card__header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-.sw-card__icon {
-  width: 52px;
-  height: 52px;
-  background: var(--red-glow);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-}
-.sw-card__name {
-  font-family: var(--font-display);
-  font-size: 24px;
-  color: var(--black);
-}
-.sw-card__text {
-  font-size: 14px;
-  color: var(--gray-600);
-  line-height: 1.7;
-  margin-bottom: 20px;
-}
-.sw-card__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--red);
-  font-weight: 700;
-  font-size: 14px;
-  text-decoration: none;
-  transition: gap 0.2s;
-}
+.sw-card__header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+.sw-card__icon { width: 52px; height: 52px; background: var(--red-glow); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.sw-card__name { font-family: var(--font-display); font-size: 24px; color: var(--black); }
+.sw-card__text { font-size: 14px; color: var(--gray-600); line-height: 1.7; margin-bottom: 20px; }
+.sw-card__link { display: inline-flex; align-items: center; gap: 8px; color: var(--red); font-weight: 700; font-size: 14px; text-decoration: none; transition: gap 0.2s; }
 .sw-card__link:hover { gap: 14px; }
-.coupon-badge {
-  display: inline-block;
-  background: #E8F5E9;
-  color: #2E7D32;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 8px;
-  margin-top: 12px;
-}
+.coupon-badge { display: inline-block; background: #E8F5E9; color: #2E7D32; font-family: var(--font-mono); font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 8px; margin-top: 12px; }
 
-/* ═══ CTA SECTION ═══ */
-.cta-section {
-  background: var(--red);
-  color: var(--white);
-  padding: 100px 0;
-  text-align: center;
-}
-.cta-section h2 {
-  font-family: var(--font-display);
-  font-size: clamp(36px, 6vw, 64px);
-  line-height: 1;
-  margin-bottom: 20px;
-}
-.cta-section p {
-  font-size: 18px;
-  opacity: 0.85;
-  max-width: 480px;
-  margin: 0 auto 40px;
-  line-height: 1.7;
-}
+/* ═══ CTA ═══ */
+.cta-section { background: var(--red); color: var(--white); padding: 100px 0; text-align: center; }
+.cta-section h2 { font-family: var(--font-display); font-size: clamp(36px, 6vw, 64px); line-height: 1; margin-bottom: 20px; }
+.cta-section p { font-size: 18px; opacity: 0.85; max-width: 480px; margin: 0 auto 40px; line-height: 1.7; }
 
 /* ═══ FOOTER ═══ */
-.footer {
-  background: var(--white-off);
-  color: var(--gray-600);
-  padding: 64px 0 40px;
-  border-top: 1px solid var(--gray-100);
-}
-.footer__inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 40px;
-  padding-bottom: 40px;
-  border-bottom: 1px solid var(--gray-100);
-}
-.footer__brand {
-  font-family: var(--font-display);
-  font-size: 28px;
-  color: var(--black);
-  margin-bottom: 12px;
-}
+.footer { background: var(--white-off); color: var(--gray-600); padding: 64px 0 40px; border-top: 1px solid var(--gray-100); }
+.footer__inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--gray-100); }
+.footer__brand { font-family: var(--font-display); font-size: 28px; color: var(--black); margin-bottom: 12px; }
 .footer__text { font-size: 14px; line-height: 1.7; max-width: 320px; }
 .footer__links { display: flex; gap: 48px; }
-.footer__col-title {
-  font-weight: 700;
-  color: var(--black);
-  font-size: 13px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-}
-.footer__col a {
-  display: block;
-  color: var(--gray-600);
-  text-decoration: none;
-  font-size: 14px;
-  padding: 4px 0;
-  transition: color 0.2s;
-}
+.footer__col-title { font-weight: 700; color: var(--black); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+.footer__col a { display: block; color: var(--gray-600); text-decoration: none; font-size: 14px; padding: 4px 0; transition: color 0.2s; }
 .footer__col a:hover { color: var(--red); }
-.footer__copy {
-  text-align: center;
-  font-size: 13px;
-  padding-top: 32px;
-  color: var(--gray-400);
-}
+.footer__copy { text-align: center; font-size: 13px; padding-top: 32px; color: var(--gray-400); }
 
 /* ═══ ANIMATIONS ═══ */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.3); }
-}
-.fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+.fade-in { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 900px) {
   .steps-grid { grid-template-columns: 1fr 1fr; }
   .strategy-grid { grid-template-columns: 1fr; }
   .setups-list { grid-template-columns: 1fr; }
-  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
   .about-block { grid-template-columns: 1fr; gap: 40px; }
   .software-cards { grid-template-columns: 1fr; }
   .podcast-banner { flex-direction: column; text-align: center; padding: 40px 28px; }
@@ -813,7 +426,7 @@ body {
   <div class="nav__inner">
     <a href="#" class="nav__logo">
       <div class="nav__logo-icon">C</div>
-      COPYMYTRADE
+      <span style="color:#4FC3F7">COPY</span><span style="color:#fff">MY</span><span style="color:#00E676">TRADES</span>
     </a>
     <div class="nav__links">
       <a href="#how">How It Works</a>
@@ -825,16 +438,16 @@ body {
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO (DARK) -->
 <section class="hero">
   <div class="hero__grid-bg"></div>
   <div class="container hero__content">
     <div class="hero__badge"><span class="dot"></span> Live Copy Trading — Powered by Replikanto</div>
-    <h1 class="hero__title">COPY MY<br>TRAD<h1 class="hero__title"><span style="color:#4FC3F7">COPY</span> MY<br>TRADES <span>LIVE.</span></h1>ES <span>LIVE.</span></h1>
+    <h1 class="hero__title"><span class="blue">COPY</span> MY<br>TRADES <span class="red">LIVE.</span></h1>
     <p class="hero__sub">Real-time futures trade copying powered by Replikanto & NinjaTrader 8. My setups fire — your account executes. No delay, no guesswork.</p>
     <div class="hero__actions">
-      <a href="#pricing" class="btn btn--red">Get Started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      <a href="#strategy" class="btn btn--outline-dark">See the Strategy</a>
+      <a href="#pricing" class="btn btn--red">Coming Soon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#strategy" class="btn btn--outline-light">See the Strategy</a>
     </div>
     <div class="hero__stats">
       <div>
@@ -866,35 +479,15 @@ body {
       <p class="section-sub">Get set up in under 30 minutes. Once connected, trades copy automatically — no manual intervention needed.</p>
     </div>
     <div class="steps-grid">
-      <div class="step-card fade-in">
-        <div class="step-num">01</div>
-        <div class="step-icon">📊</div>
-        <div class="step-title">Get a Prop Account</div>
-        <div class="step-desc">Sign up with Apex, Bulenox, or any NinjaTrader-compatible prop firm. Start with an evaluation account during the rollout phase.</div>
-      </div>
-      <div class="step-card fade-in">
-        <div class="step-num">02</div>
-        <div class="step-icon">⚡</div>
-        <div class="step-title">Install Replikanto</div>
-        <div class="step-desc">Purchase and install the Replikanto add-on for NinjaTrader 8. Set it to Subscriber mode and grab your Remote ID.</div>
-      </div>
-      <div class="step-card fade-in">
-        <div class="step-num">03</div>
-        <div class="step-icon">🔗</div>
-        <div class="step-title">Connect on the Portal</div>
-        <div class="step-desc">Log into copytrade.daytradingradio.com with your membership credentials. Enter your NinjaTrader account name and Replikanto ID.</div>
-      </div>
-      <div class="step-card fade-in">
-        <div class="step-num">04</div>
-        <div class="step-icon">🚀</div>
-        <div class="step-title">Trades Copy Automatically</div>
-        <div class="step-desc">Once approved, every HPS trade fires into your account in real time. Sit back and let the system work.</div>
-      </div>
+      <div class="step-card fade-in"><div class="step-num">01</div><div class="step-icon">📊</div><div class="step-title">Get a Prop Account</div><div class="step-desc">Sign up with Apex, Bulenox, or any NinjaTrader-compatible prop firm. Start with an evaluation account during the rollout phase.</div></div>
+      <div class="step-card fade-in"><div class="step-num">02</div><div class="step-icon">⚡</div><div class="step-title">Install Replikanto</div><div class="step-desc">Purchase and install the Replikanto add-on for NinjaTrader 8. Set it to Subscriber mode and grab your Remote ID.</div></div>
+      <div class="step-card fade-in"><div class="step-num">03</div><div class="step-icon">🔗</div><div class="step-title">Connect on the Portal</div><div class="step-desc">Log into copytrade.daytradingradio.com with your membership credentials. Enter your NinjaTrader account name and Replikanto ID.</div></div>
+      <div class="step-card fade-in"><div class="step-num">04</div><div class="step-icon">🚀</div><div class="step-title">Trades Copy Automatically</div><div class="step-desc">Once approved, every HPS trade fires into your account in real time. Sit back and let the system work.</div></div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT / EXPERIENCE -->
+<!-- ABOUT -->
 <section class="section section--white">
   <div class="container">
     <div class="about-block fade-in">
@@ -935,27 +528,9 @@ body {
       <p class="section-sub">Every trade is based on a carefully selected divergence setup. No random entries, no FOMO trades — just high-probability setups with defined criteria.</p>
     </div>
     <div class="strategy-grid">
-      <div class="strat-card fade-in">
-        <div class="strat-card__icon">🎯</div>
-        <div class="strat-card__title">THE HPS TRADE</div>
-        <div class="strat-card__text">The core setup — a divergence with a steep angle between stage one and stage two. Entry timing is based on the 5-minute timeframe, with trend and news as additional factors.</div>
-        <div class="strat-card__detail">
-          <p>Entry: 5-min divergence confirmation<br>Contracts: 3–5 per trade<br>MES profit range: $20 – $100<br>ES profit range: $200 – $1,000</p>
-        </div>
-      </div>
-      <div class="strat-card fade-in">
-        <div class="strat-card__icon">📊</div>
-        <div class="strat-card__title">CONTRACT OPTIONS</div>
-        <div class="strat-card__text">Trades execute on MES (Micro E-mini S&P) by default. Participants can switch to ES (E-mini S&P) through the Replikanto software for larger position sizing.</div>
-        <div class="strat-card__detail">
-          <p>Default: MES (Micro E-mini)<br>Optional: ES with crossover switch<br>Recommended: Activate crossover for ES minis</p>
-        </div>
-      </div>
-      <div class="strat-card strat-card--wide fade-in">
-        <div class="strat-card__icon">⚠️</div>
-        <div class="strat-card__title">NEWS EVENT PROTOCOL</div>
-        <div class="strat-card__text">Efforts are made to avoid trading during major news events — unless there is a clear, high-level divergence opportunity that meets all criteria. This discipline protects your account from erratic price spikes and ensures every trade aligns with the system's core methodology.</div>
-      </div>
+      <div class="strat-card fade-in"><div class="strat-card__icon">🎯</div><div class="strat-card__title">THE HPS TRADE</div><div class="strat-card__text">The core setup — a divergence with a steep angle between stage one and stage two. Entry timing is based on the 5-minute timeframe, with trend and news as additional factors.</div><div class="strat-card__detail"><p>Entry: 5-min divergence confirmation<br>Contracts: 3–5 per trade<br>MES profit range: $20 – $100<br>ES profit range: $200 – $1,000</p></div></div>
+      <div class="strat-card fade-in"><div class="strat-card__icon">📊</div><div class="strat-card__title">CONTRACT OPTIONS</div><div class="strat-card__text">Trades execute on MES (Micro E-mini S&P) by default. Participants can switch to ES (E-mini S&P) through the Replikanto software for larger position sizing.</div><div class="strat-card__detail"><p>Default: MES (Micro E-mini)<br>Optional: ES with crossover switch<br>Recommended: Activate crossover for ES minis</p></div></div>
+      <div class="strat-card strat-card--wide fade-in"><div class="strat-card__icon">⚠️</div><div class="strat-card__title">NEWS EVENT PROTOCOL</div><div class="strat-card__text">Efforts are made to avoid trading during major news events — unless there is a clear, high-level divergence opportunity that meets all criteria. This discipline protects your account from erratic price spikes and ensures every trade aligns with the system's core methodology.</div></div>
     </div>
   </div>
 </section>
@@ -969,36 +544,12 @@ body {
       <p class="section-sub">Only these specific patterns qualify for execution. Every trade must meet the strict entry rules — no exceptions.</p>
     </div>
     <div class="setups-list">
-      <div class="setup-item fade-in">
-        <div class="setup-item__icon">📉</div>
-        <div class="setup-item__name">HPS DIVERGENCE</div>
-        <div class="setup-item__desc">The primary setup — steep angle divergence between stage 1 and stage 2 on the 5-minute chart. Both long and short sides.</div>
-      </div>
-      <div class="setup-item fade-in">
-        <div class="setup-item__icon">🔄</div>
-        <div class="setup-item__name">1-2-3 CHANNEL + QUAD ROTATION</div>
-        <div class="setup-item__desc">Channel breakout combined with the quad rotation signal. Taken when aligned with the dominant trend direction.</div>
-      </div>
-      <div class="setup-item fade-in">
-        <div class="setup-item__icon">🌀</div>
-        <div class="setup-item__name">COILED STOCHASTIC</div>
-        <div class="setup-item__desc">Less common but high-conviction. Taken especially when it ends in a divergence, amplifying the probability of success.</div>
-      </div>
-      <div class="setup-item fade-in">
-        <div class="setup-item__icon">🏁</div>
-        <div class="setup-item__name">20/20 BULL FLAG</div>
-        <div class="setup-item__desc">A perfect bull flag pattern taken on occasion when the strength of the current uptrend supports the setup.</div>
-      </div>
-      <div class="setup-item fade-in">
-        <div class="setup-item__icon">🐻</div>
-        <div class="setup-item__name">20/20 BEAR FLAG</div>
-        <div class="setup-item__desc">The bearish counterpart — a perfect bear flag taken when the current downtrend has clear momentum and structure.</div>
-      </div>
-      <div class="setup-item fade-in">
-        <div class="setup-item__icon">💎</div>
-        <div class="setup-item__name">STRICT CRITERIA ONLY</div>
-        <div class="setup-item__desc">No random trades, no FOMO entries. If the setup doesn't meet every rule, it doesn't fire. Discipline is the edge.</div>
-      </div>
+      <div class="setup-item fade-in"><div class="setup-item__icon">📉</div><div class="setup-item__name">HPS DIVERGENCE</div><div class="setup-item__desc">The primary setup — steep angle divergence between stage 1 and stage 2 on the 5-minute chart. Both long and short sides.</div></div>
+      <div class="setup-item fade-in"><div class="setup-item__icon">🔄</div><div class="setup-item__name">1-2-3 CHANNEL + QUAD ROTATION</div><div class="setup-item__desc">Channel breakout combined with the quad rotation signal. Taken when aligned with the dominant trend direction.</div></div>
+      <div class="setup-item fade-in"><div class="setup-item__icon">🌀</div><div class="setup-item__name">COILED STOCHASTIC</div><div class="setup-item__desc">Less common but high-conviction. Taken especially when it ends in a divergence, amplifying the probability of success.</div></div>
+      <div class="setup-item fade-in"><div class="setup-item__icon">🏁</div><div class="setup-item__name">20/20 BULL FLAG</div><div class="setup-item__desc">A perfect bull flag pattern taken on occasion when the strength of the current uptrend supports the setup.</div></div>
+      <div class="setup-item fade-in"><div class="setup-item__icon">🐻</div><div class="setup-item__name">20/20 BEAR FLAG</div><div class="setup-item__desc">The bearish counterpart — a perfect bear flag taken when the current downtrend has clear momentum and structure.</div></div>
+      <div class="setup-item fade-in"><div class="setup-item__icon">💎</div><div class="setup-item__name">STRICT CRITERIA ONLY</div><div class="setup-item__desc">No random trades, no FOMO entries. If the setup doesn't meet every rule, it doesn't fire. Discipline is the edge.</div></div>
     </div>
   </div>
 </section>
@@ -1014,15 +565,13 @@ body {
       <div class="podcast-banner__icon">🎙</div>
       <div>
         <div class="podcast-banner__title">LIVE PODCAST & Q&A — EVERY TUESDAY</div>
-        <div class="podcast-banner__text">
-          Join us every Tuesday for a live podcast and Q&A stream. We help new users set up accounts, explain how the copy trading system works, and break down trades and performance live. The stream is live on YouTube and includes analytics from the master account.
-        </div>
+        <div class="podcast-banner__text">Join us every Tuesday for a live podcast and Q&A stream. We help new users set up accounts, explain how the copy trading system works, and break down trades and performance live. The stream is live on YouTube and includes analytics from the master account.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
+<!-- PRICING — COMING SOON -->
 <section class="section section--white" id="pricing">
   <div class="container">
     <div class="section-header fade-in" style="text-align:center;">
@@ -1031,68 +580,37 @@ body {
       <p class="section-sub" style="margin-left:auto;margin-right:auto;">Sending trade signals across multiple machines incurs real costs — similar to commissions. The fee covers these infrastructure costs.</p>
     </div>
     <div class="pricing-grid fade-in">
-      <div class="price-card price-card--featured">
-        <div class="price-card__type">DTR MEMBERS</div>
-        <div class="price-card__desc">Active DayTradingRadio.com members</div>
-        <div class="price-card__amount"><sup>$</sup>30</div>
-        <div class="price-card__period">per month</div>
-        <ul class="price-card__features">
-          <li><span class="check">✓</span> Real-time trade copying via Replikanto</li>
-          <li><span class="check">✓</span> All HPS divergence trades</li>
-          <li><span class="check">✓</span> Copy Trading Portal access</li>
-          <li><span class="check">✓</span> Voxer Futures Trade Alerts</li>
-          <li><span class="check">✓</span> Copy Trading Tuesdays livestream</li>
-          <li><span class="check">✓</span> Setup support & onboarding</li>
-        </ul>
-        <a href="https://daytradingradio.com/amember/buy/A3JNaccOrbGy" class="btn btn--red" style="width:100%;justify-content:center;">Add Copy Trading →</a>
-        <p style="font-size:12px;color:var(--gray-400);text-align:center;margin-top:12px;">Requires an active DTR membership. <a href="https://daytradingradio.com/amember/signup" style="color:var(--red);text-decoration:underline;">Not a member yet? Join here.</a></p>
-      </div>
-      <div class="price-card">
-        <div class="price-card__type">QR SCANNER OWNERS</div>
-        <div class="price-card__desc">Own a DTR QR Scanner Pro? Add copy trading.</div>
-        <div class="price-card__amount"><sup>$</sup>30</div>
-        <div class="price-card__period">per month</div>
-        <ul class="price-card__features">
-          <li><span class="check">✓</span> Real-time trade copying via Replikanto</li>
-          <li><span class="check">✓</span> All HPS divergence trades</li>
-          <li><span class="check">✓</span> Copy Trading Portal access</li>
-          <li><span class="check">✓</span> Voxer Futures Trade Alerts</li>
-          <li><span class="check">✓</span> Copy Trading Tuesdays livestream</li>
-          <li><span class="check">✓</span> Setup support & onboarding</li>
-        </ul>
-        <a href="https://buy.stripe.com/bJe3cv9pn4Ug0R1b3h3Ru03" class="btn btn--dark" style="width:100%;justify-content:center;">Subscribe via Stripe →</a>
-        <p style="font-size:12px;color:var(--gray-400);text-align:center;margin-top:12px;">For QR Scanner Pro owners (lifetime or DTR-bundled). <a href="https://benefits.daytradingradio.com/qr-scanner/" style="color:var(--red);text-decoration:underline;">Don't have the scanner? Get it here.</a></p>
-      </div>
-      <div class="price-card">
-        <div class="price-card__type">NON-MEMBERS</div>
-        <div class="price-card__desc">No DTR membership or scanner required</div>
-        <div class="price-card__amount"><sup>$</sup>69<span style="font-size:32px;">.95</span></div>
-        <div class="price-card__period">per month</div>
-        <ul class="price-card__features">
-          <li><span class="check">✓</span> Real-time trade copying via Replikanto</li>
-          <li><span class="check">✓</span> All HPS divergence trades</li>
-          <li><span class="check">✓</span> Copy Trading Portal access</li>
-          <li><span class="check">✓</span> Voxer Futures Trade Alerts</li>
-          <li><span class="check">✓</span> Copy Trading Tuesdays livestream</li>
-          <li><span class="check">✓</span> Setup support & onboarding</li>
-        </ul>
-        <a href="#" class="btn btn--dark" style="width:100%;justify-content:center;">Join via Patreon →</a>
-        <p style="font-size:12px;color:var(--gray-400);text-align:center;margin-top:12px;">Standalone access — no other membership needed.</p>
+      <div style="background:var(--white);border:2px solid var(--red);border-radius:24px;padding:56px 40px;text-align:center;">
+        <div style="font-size:48px;margin-bottom:16px;">🚧</div>
+        <div style="font-family:var(--font-display);font-size:42px;color:var(--red);margin-bottom:12px;">COMING SOON</div>
+        <div style="font-size:17px;color:var(--gray-600);line-height:1.7;margin-bottom:24px;">We're finishing up testing and will open signups very soon.<br><strong style="color:var(--black);">Please do not sign up yet.</strong></div>
+        <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;">
+          <div style="text-align:center;">
+            <div style="font-family:var(--font-display);font-size:36px;color:var(--black);">$30</div>
+            <div style="font-size:12px;color:var(--gray-400);">DTR Members &<br>Scanner Owners</div>
+          </div>
+          <div style="width:1px;background:var(--gray-100);"></div>
+          <div style="text-align:center;">
+            <div style="font-family:var(--font-display);font-size:36px;color:var(--black);">$69.95</div>
+            <div style="font-size:12px;color:var(--gray-400);">Non-Members<br>via Patreon</div>
+          </div>
+        </div>
+        <div style="background:var(--red-light);border-radius:12px;padding:16px 20px;font-size:14px;color:var(--gray-600);line-height:1.7;">
+          Signups will be available for <strong>DTR Members</strong>, <strong>QR Scanner Owners</strong>, and <strong>Non-Members via Patreon</strong> once testing is complete.
+        </div>
       </div>
     </div>
     <div class="warning fade-in">
       <div class="warning__icon">⚠️</div>
       <div>
         <div class="warning__title">Legal & Risk Advisory — Early Rollout Phase</div>
-        <div class="warning__text">
-          This project is in active development and should be considered experimental. There is risk of trades not transmitting correctly, platform crashes, and open trades not closing as expected. <strong>Please connect only evaluation or demo accounts during the early rollout phase.</strong> Participation requires strict adherence to the outlined criteria. Past performance does not guarantee future results. Trading futures involves substantial risk of loss.
-        </div>
+        <div class="warning__text">This project is in active development and should be considered experimental. There is risk of trades not transmitting correctly, platform crashes, and open trades not closing as expected. <strong>Please connect only evaluation or demo accounts during the early rollout phase.</strong> Participation requires strict adherence to the outlined criteria. Past performance does not guarantee future results. Trading futures involves substantial risk of loss.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SOFTWARE & SETUP -->
+<!-- SOFTWARE -->
 <section class="section section--cream" id="software">
   <div class="container">
     <div class="section-header fade-in">
@@ -1100,26 +618,8 @@ body {
       <h2 class="section-title" style="margin-top:16px;">WHAT YOU NEED<br>TO GET STARTED</h2>
     </div>
     <div class="software-cards">
-      <div class="sw-card fade-in">
-        <div class="sw-card__header">
-          <div class="sw-card__icon">⚡</div>
-          <div class="sw-card__name">REPLIKANTO</div>
-        </div>
-        <div class="sw-card__text">The copy trading software that connects your NinjaTrader 8 account to the master account. Purchase, install, and set to Subscriber mode.</div>
-        <a href="https://flowbots.ninja/?wpam_id=151" class="sw-card__link" target="_blank">Purchase Replikanto →</a>
-        <br>
-        <div class="coupon-badge">💰 Use code: radio20 for 20% off</div>
-      </div>
-      <div class="sw-card fade-in">
-        <div class="sw-card__header">
-          <div class="sw-card__icon">📊</div>
-          <div class="sw-card__name">PROP ACCOUNT</div>
-        </div>
-        <div class="sw-card__text">You need a NinjaTrader 8 compatible prop firm account — Apex, Bulenox, or similar. Start with an evaluation account during the early phase.</div>
-        <a href="https://benefits.daytradingradio.com/prop/" class="sw-card__link" target="_blank">Current Prop Account Deals →</a>
-        <br>
-        <div class="coupon-badge">🏷 Best current discounts & coupons</div>
-      </div>
+      <div class="sw-card fade-in"><div class="sw-card__header"><div class="sw-card__icon">⚡</div><div class="sw-card__name">REPLIKANTO</div></div><div class="sw-card__text">The copy trading software that connects your NinjaTrader 8 account to the master account. Purchase, install, and set to Subscriber mode.</div><a href="https://flowbots.ninja/?wpam_id=151" class="sw-card__link" target="_blank">Purchase Replikanto →</a><br><div class="coupon-badge">💰 Use code: radio20 for 20% off</div></div>
+      <div class="sw-card fade-in"><div class="sw-card__header"><div class="sw-card__icon">📊</div><div class="sw-card__name">PROP ACCOUNT</div></div><div class="sw-card__text">You need a NinjaTrader 8 compatible prop firm account — Apex, Bulenox, or similar. Start with an evaluation account during the early phase.</div><a href="https://benefits.daytradingradio.com/prop/" class="sw-card__link" target="_blank">Current Prop Account Deals →</a><br><div class="coupon-badge">🏷 Best current discounts & coupons</div></div>
     </div>
   </div>
 </section>
@@ -1128,10 +628,10 @@ body {
 <section class="cta-section">
   <div class="container">
     <div class="fade-in">
-      <h2>READY TO COPY<br>LIVE TRADES?</h2>
-      <p>Join the Copy Trading Project today. Get connected, get approved, and start receiving trades automatically.</p>
+      <h2>COPY TRADING<br>COMING SOON</h2>
+      <p>We're finishing up testing and will open signups very soon. Check back shortly!</p>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-        <a href="https://copytrade.daytradingradio.com" class="btn btn--white">Launch the Portal →</a>
+        <a href="#strategy" class="btn btn--white">Learn About the Strategy</a>
         <a href="#pricing" class="btn btn--outline-white">See Pricing</a>
       </div>
     </div>
@@ -1143,7 +643,7 @@ body {
   <div class="container">
     <div class="footer__inner">
       <div>
-        <div class="footer__brand">COPYMYTRADE.APP</div>
+        <div class="footer__brand">COPYMYTRADES.APP</div>
         <div class="footer__text">A live futures copy trading project powered by Replikanto & NinjaTrader 8. From the desk of DayTradingRadio.com.</div>
       </div>
       <div class="footer__links">
@@ -1163,22 +663,16 @@ body {
         </div>
       </div>
     </div>
-    <div class="footer__copy">
-      &copy; 2026 DayTradingRadio.com — All rights reserved. Trading futures involves substantial risk of loss. This is not financial advice. Past performance does not guarantee future results.
-    </div>
+    <div class="footer__copy">&copy; 2026 DayTradingRadio.com — All rights reserved. Trading futures involves substantial risk of loss. This is not financial advice. Past performance does not guarantee future results.</div>
   </div>
 </footer>
 
 <script>
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
-});
+window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60); });
 </script>
 
 </body>
